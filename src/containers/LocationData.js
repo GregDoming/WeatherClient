@@ -1,32 +1,35 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch';
-import PropTypes from 'prop-types'
 
-import Input from '../components/LocationInput.js';
+
+import Input from '../components/LocationInput';
 
 class LocationData extends Component {
   state = {
     location: '',
   }
 
-  // handleLocationClick = async (str) => {
-  //   // fetch('/users', {
-  //   //   method: 'POST',
-  //   //   body: new FormData(form)
-  //   // })
-  // }
+  handleLocationSubmit = (event) => {
+  event.preventDefault();
+  this.setState({ location: '' })
+    //   console.log(this.state.location)
+    // fetch('/users', {
+    //   method: 'POST',
+    //   body: new FormData(form)
+    // })
+  }
 
-  handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value})
+  handleLocationChange = (event) => {
+    this.setState({ location: event.target.value})
   }
 
 
   render () {
     console.log(this.state.location);
     return (
-      <form onSubmit={this.handleChange}>
-        <Input inputType="input" type="text" placeholder="Location" ></Input>
-        {/* <button onClick={this.handleLocationClick}></button> */}
+      <form onSubmit={this.handleLocationChange}>
+        <Input type="text" placeholder="Location" value={this.state.location} onChange={this.handleLocationChange} ></Input>
+        <button onClick={this.handleLocationSubmit}>Location</button>
       </form>
     )
   }
