@@ -33,7 +33,9 @@
   },
   "dependencies": {
     "path": "^0.12.7",
+    "prop-types": "^15.7.2",
     "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "react-dom": "^16.8.4",
+    "whatwg-fetch": "^3.0.0"
   }
 }
