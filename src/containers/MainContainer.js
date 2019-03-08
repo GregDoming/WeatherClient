@@ -5,7 +5,6 @@ import 'whatwg-fetch';
 import Input from '../components/LocationInput';
 import WeatherForecast from '../components/WeatherForcast';
 import WeatherIcon from '../components/WeatherIcon';
-import './MainContainer.module.css';
 
 const text = 'Enter an Address to get 6 day forecast';
 const pass = '12345';

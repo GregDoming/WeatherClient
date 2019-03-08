@@ -11,7 +11,6 @@ import HeavyCloudImg from '../../build/static/wi-cloudy-gusts.svg';
 import LightClougImg from '../../build/static/wi-cloudy.svg';
 import ClearImg from '../../build/static/wi-day-sunny.svg';
 import ThermometerImg from '../../build/static/wi-thermometer.svg';
-import './WeatherIcon.css';
 
 
 const WeatherIcon = (props) => {

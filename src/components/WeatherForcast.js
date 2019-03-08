@@ -62,5 +62,4 @@ const WeatherForecast = (props) => {
   return <div className="forecastByDay">{columnGraph}</div>;
 };
 
-
 export default WeatherForecast;
