@@ -4,9 +4,10 @@ import 'whatwg-fetch';
 
 import Input from '../components/LocationInput';
 import WeatherForecast from '../components/WeatherForcast';
-import './MainContainer.css';
+import WeatherIcon from '../components/WeatherIcon';
+import './MainContainer.module.css';
 
-const text = "Enter an Address to get 6 day forecast"
+const text = 'Enter an Address to get 6 day forecast';
 
 class MainContainer extends Component {
   state = {
@@ -101,6 +102,7 @@ class MainContainer extends Component {
     return (
       <div className="mainContainer">
         <form onSubmit={event => this.handleLocationChange(event)}>
+          <WeatherIcon forecast={this.state.forecast}></WeatherIcon>
           <WeatherForecast forecast={this.state.forecast} location={this.state.location} />
           <Input type="text" placeholder="Location" value={this.state.location} onChange={this.handleLocationChange} />
           <button type="submit" onClick={event => this.handleLocationSubmit(event)}>Location</button>

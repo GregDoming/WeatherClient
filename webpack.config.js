@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: ['babel-polyfill', './src/index.js'],
@@ -15,7 +16,14 @@ module.exports = {
     }
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(), 
+    new webpack.HotModuleReplacementPlugin(),
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: "[name].css",
+      chunkFilename: "[id].css"
+    })
+
   ],
   module: {
     rules: [
@@ -27,8 +35,16 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // you can specify a publicPath here
+              // by default it use publicPath in webpackOptions.output
+              publicPath: '*'
+            }
+          },
           // setup to use CSS modules
-          { loader: 'style-loader' },
+          // { loader: 'style-loader' },
           { 
             loader: 'css-loader',  
             options: {
@@ -40,7 +56,21 @@ module.exports = {
             } 
           },       
         ]
-      }
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: 'babel-loader'
+          },
+          {
+            loader: 'react-svg-loader',
+            options: {
+              jsx: true // true outputs JSX tags
+            }
+          }
+        ]
+      },
     ],
   },
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import Chart from 'react-google-charts';
 
 const WeatherForecast = (props) => {
+  const options = { title: 'CITY' };
   // const check = props.forecast[0].temp
   if (props.forecast[0].temp === 0.5) {
     const dataArr = [
@@ -17,6 +18,7 @@ const WeatherForecast = (props) => {
     
     const columnGraph = (
       <Chart
+        options={options}
         chartType="ColumnChart"
         width="100%"
         height="400px"
@@ -28,7 +30,7 @@ const WeatherForecast = (props) => {
   const { forecast } = props;
   const { location } = props;
   const dataArr = [
-    ['DAY', 'TEMPERATURE'],
+    ['DAY', 'TEMPERATURE In C'],
     ['Sunday'],
     ['Monday'],
     ['Tuesday'],
@@ -44,6 +46,7 @@ const WeatherForecast = (props) => {
 
   const columnGraph = (
     <Chart
+      options={options}
       chartType="ColumnChart"
       width="100%"
       height="400px"
