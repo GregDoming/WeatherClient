@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import 'whatwg-fetch';
 
 import Input from '../components/LocationInput';
-import WeatherForecast from './WeatherForcast';
+import WeatherForecast from '../components/WeatherForcast';
 import './MainContainer.css';
 
 
@@ -62,7 +62,10 @@ class MainContainer extends Component {
       const forecastObj = locationData.consolidated_weather;
 
       const forecast = this.parseForecast(forecastObj);
-      this.setState(forecast);
+
+      await this.setState(forecast);
+      console.log('checking here')
+      console.log(this.state.forecast)
     } catch (error) {
       console.log('Error!', error);
     }
@@ -91,7 +94,7 @@ class MainContainer extends Component {
 
   render() {
     return (
-      <div class="mainContainer">
+      <div className="mainContainer">
         <form onSubmit={event => this.handleLocationChange(event)}>
           <WeatherForecast forecast={this.state.forecast} />
           <Input type="text" placeholder="Location" value={this.state.location} onChange={this.handleLocationChange} />
