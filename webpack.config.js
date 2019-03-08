@@ -10,6 +10,9 @@ module.exports = {
   },
   devServer: {
     contentBase: './build',
+    proxy: {
+      '/api': 'http://localhost:4400'
+    }
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin()

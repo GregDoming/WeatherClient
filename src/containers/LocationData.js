@@ -14,7 +14,7 @@ class LocationData extends Component {
     // console.log(typeof location)
     this.setState({ location: '' });
     try {
-      const response = await fetch('http://localhost:4400/forecast', {
+      const response = await fetch('/api/forecast', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json; charset=utf-8', Accept: 'application/json'
