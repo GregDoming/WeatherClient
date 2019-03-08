@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LocationData from './containers/LocationData.js';
+import MainContainer from './containers/MainContainer';
 
 class App extends Component {
   render() {

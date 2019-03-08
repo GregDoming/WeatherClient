@@ -3,11 +3,12 @@ import 'whatwg-fetch';
 
 import Input from '../components/LocationInput';
 import WeatherForecast from './WeatherForcast';
+import './MainContainer.css';
 
 
-class LocationData extends Component {
+class MainContainer extends Component {
   state = {
-    location: 'hi',
+    location: '',
     forecast: 
     [      
       {
@@ -101,4 +102,4 @@ class LocationData extends Component {
   }
 }
 
-export default LocationData;
+export default MainContainer;
