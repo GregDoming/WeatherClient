@@ -3,10 +3,12 @@ import 'whatwg-fetch';
 
 import Input from '../components/LocationInput';
 
+
 class LocationData extends Component {
   state = {
     location: '',
   }
+
 
   handleLocationSubmit = async (event) => {
     const { location } = this.state;
@@ -14,15 +16,10 @@ class LocationData extends Component {
     // console.log(typeof location)
     this.setState({ location: '' });
     try {
-      const response = await fetch('/api/forecast', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8', Accept: 'application/json'
-        },
-        body: JSON.stringify({ location })
-      });
+      const url = `/api/forecast?${location}`;
+      const response = await fetch(url);
       const locationData = await response.text();
-      console.log(locationData)
+      console.log(locationData);
     } catch (error) {
       console.log('Error!', error);
     }
