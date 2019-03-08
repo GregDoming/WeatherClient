@@ -7,7 +7,6 @@ import Chart from 'react-google-charts';
  * @param {string} temp Th average of the high and low temperatures for the day in Celicius
  */
 
-
 const WeatherForecast = (props) => {
   const { city } = props;
   let title = 'CITY';

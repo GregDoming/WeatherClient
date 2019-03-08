@@ -7,6 +7,7 @@ import WeatherForecast from '../components/WeatherForcast';
 import WeatherIcon from '../components/WeatherIcon';
 
 const text = 'Enter an Address to get 6 day forecast';
+// Top Secret password
 const pass = '12345';
 
 class MainContainer extends Component {
@@ -55,6 +56,8 @@ class MainContainer extends Component {
     ]
   }
 
+  // Sends fetch request to the microservice to get weather according to user's input 
+  // && sets this.state.city and
   handleLocationSubmit = async (event) => {
     const { input } = this.state;
     event.preventDefault();
@@ -82,6 +85,7 @@ class MainContainer extends Component {
     }
   }
 
+  // Takes the response object from the server and puts the relevant information into state
   parseForecast = (obj) => {
     const date = new Date();
     const tempForecast = Object.assign(this.state.forecast);

@@ -13,6 +13,12 @@ import ClearImg from '../../build/static/wi-day-sunny.svg';
 import ThermometerImg from '../../build/static/wi-thermometer.svg';
 
 
+/**
+ * Turns weather descriptions into corresponding scg icons to display above bar chart
+ * @param {string} props.forecast[i].weather Six day one to two word 
+ * descrtiption of the weather
+ */
+
 const WeatherIcon = (props) => {
   const weatherImgArr = [];
   const weatherStatusArr = [];
