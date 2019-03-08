@@ -1,5 +1,9 @@
 import React from 'react';
 
+/**
+ * Displays the bar chart with city and temperature
+ * @param {string} input User input data that is parsed so all characters will work with HTML
+ */
 
 const input = (props) => {
   let inputElement = null;

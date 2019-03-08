@@ -1,9 +1,15 @@
 import React from 'react';
 import Chart from 'react-google-charts';
 
+/**
+ * Displays the bar chart with city and temperature
+ * @param {string} city City to get weather from
+ * @param {string} temp Th average of the high and low temperatures for the day in Celicius
+ */
+
+
 const WeatherForecast = (props) => {
   const { city } = props;
-  const weatherArr = [];
   let title = 'CITY';
 
   if (city) title = city;
