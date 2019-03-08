@@ -9,7 +9,6 @@ class LocationData extends Component {
     location: '',
   }
 
-
   handleLocationSubmit = async (event) => {
     const { location } = this.state;
     event.preventDefault();
@@ -28,7 +27,6 @@ class LocationData extends Component {
   handleLocationChange = (event) => {
     this.setState({ location: event.target.value });
   }
-
 
   render() {
     return (
