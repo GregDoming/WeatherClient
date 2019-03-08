@@ -2,18 +2,23 @@ import React from 'react';
 import Chart from 'react-google-charts';
 
 const WeatherForecast = (props) => {
-  const options = { title: 'CITY' };
+  const { city } = props;
+  const weatherArr = [];
+  let title = 'CITY';
+
+  if (city) title = city;
+  const options = { title };
   // const check = props.forecast[0].temp
   if (props.forecast[0].temp === 0.5) {
     const dataArr = [
-      ['DAY', 'TEMPERATURE IN C'],
-      ['Sunday', 0],
-      ['Monday', 0],
-      ['Tuesday', 0],
-      ['WednesDay', 0],
-      ['Thursday', 0],
-      ['Friday', 0],
-      ['Saturday', 0],
+      ['DAY', 'TEMPERATURE IN C', { role: 'annotation' }],
+      ['Sunday', 0, ''],
+      ['Monday', 0, ''],
+      ['Tuesday', 0, ''],
+      ['WednesDay', 0, ''],
+      ['Thursday', 0, ''],
+      ['Friday', 0, ''],
+      ['Saturday', 0, ''],
     ];
     
     const columnGraph = (
@@ -28,9 +33,8 @@ const WeatherForecast = (props) => {
     return <div className="forecastByDay">{columnGraph}</div>;
   }
   const { forecast } = props;
-  const { location } = props;
   const dataArr = [
-    ['DAY', 'TEMPERATURE In C'],
+    ['DAY', 'TEMPERATURE In C', { role: 'annotation' }],
     ['Sunday'],
     ['Monday'],
     ['Tuesday'],
@@ -42,6 +46,7 @@ const WeatherForecast = (props) => {
 
   for (let i = 0; i < 7; i += 1) {
     dataArr[i + 1].push(Math.ceil(forecast[i].temp));
+    dataArr[i + 1].push(forecast[i].weather);
   }
 
   const columnGraph = (
@@ -54,16 +59,6 @@ const WeatherForecast = (props) => {
     />
   );
     
-
-  //   forecastArr.push(
-  //     <div key={data.day}>
-  //       <b>{data.day}</b>
-  //       <strong>{data.weather}</strong>
-  //       <strong>{data.temp}</strong>
-  //     </div>
-  //   );
- 
-
   return <div className="forecastByDay">{columnGraph}</div>;
 };
 

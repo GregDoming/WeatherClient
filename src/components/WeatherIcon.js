@@ -22,7 +22,7 @@ const WeatherIcon = (props) => {
   }; 
 
   if (props.forecast[0].weather) {
-    for (let i = 0; i < 6; i += 1) {
+    for (let i = 0; i < 7; i += 1) {
       switch (props.forecast[i].weather) {
         case 'Snow':
           weatherImgArr.push(<SnowImg style={divStyle} className="image" width={10} key={`${i}snow`}>hi</SnowImg>);
@@ -72,15 +72,16 @@ const WeatherIcon = (props) => {
   } else {
     for (let i = 0; i < props.forecast.length; i += 1) {
       weatherImgArr.push(
-        <ThermometerImg style={divStyle} key={i}>hello</ThermometerImg>
+        <ThermometerImg style={divStyle} key={i} />
       );
+      weatherStatusArr.push(<div  style={{flexFlow:'row', flex: 0.07}} >{props.forecast[0].temp}</div>);
     }
   } 
   return (
-    <div style={{display: 'flex'}} className="images">
-      <div style={{flex: .13}}/>
+    <div style={{ display: 'flex' }} className="images">
+      <div style={{ flex: 0.15 }} />
       {weatherImgArr}
-      <div style={{flex: .13}}/>
+      <div style={{ flex: 0.18 }} />
     </div>
   );
 };

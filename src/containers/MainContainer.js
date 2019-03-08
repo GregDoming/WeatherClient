@@ -8,11 +8,13 @@ import WeatherIcon from '../components/WeatherIcon';
 import './MainContainer.module.css';
 
 const text = 'Enter an Address to get 6 day forecast';
+const pass = '12345';
 
 class MainContainer extends Component {
   state = {
+    city: '',
     message: text,
-    location: '',
+    input: '',
     forecast: 
     [      
       {
@@ -55,20 +57,24 @@ class MainContainer extends Component {
   }
 
   handleLocationSubmit = async (event) => {
-    const { location } = this.state;
+    const { input } = this.state;
     event.preventDefault();
+    this.setState({ city: input });
+    this.setState({ input: '' });
     
-    this.setState({ location: '' });
-    // console.log(typeof location)
     try {
-      const url = `/api/forecast?${location}`;
-      const response = await fetch(url);
+      const url = `/api/forecast?${input}`;
+      const response = await fetch(url, { 
+        headers: new Headers({
+          Authorization: pass
+        })
+      });
       const locationData = await response.json();
       if (!locationData.message) {
         const forecastObj = locationData.consolidated_weather;
 
         this.setState({}, this.parseForecast(forecastObj));
-        console.log(this.state.forecast);  
+        this.setState({ message: text });  
       } else {
         this.setState({ message: locationData.message });
       }         
@@ -95,20 +101,20 @@ class MainContainer extends Component {
   };
   
   handleLocationChange = (event) => {
-    this.setState({ location: event.target.value });
+    this.setState({ input: event.target.value.toUpperCase() });
   }
 
   render() {
     return (
       <div className="mainContainer">
-        <form style={{textAlign: 'center'}} onSubmit={event => this.handleLocationChange(event)}>
-          <WeatherIcon forecast={this.state.forecast}></WeatherIcon>
-          <WeatherForecast forecast={this.state.forecast} location={this.state.location} />
-          <div style={{ display:"flex", justifyContent: 'center' }}>
-          <Input style={{ textAlign: 'center'}} type="text" placeholder="Location" value={this.state.location} onChange={this.handleLocationChange} />
-          <button style={{ textAlign: 'center' }}type="submit" onClick={event => this.handleLocationSubmit(event)}>Location</button>
+        <form style={{ textAlign: 'center' }} onSubmit={event => this.handleLocationChange(event)}>
+          <WeatherIcon forecast={this.state.forecast} />
+          <WeatherForecast forecast={this.state.forecast} city={this.state.city} />
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <Input style={{ textAlign: 'center' }} type="text" placeholder="Location" value={this.state.input} onChange={this.handleLocationChange} />
+            <button style={{ textAlign: 'center' }} type="submit" onClick={event => this.handleLocationSubmit(event)}>Submit</button>
           </div>
-          <b>{this.state.message}</b>
+          <div style={{ paddingTop: '100px', fontSize: '30px' }}>{this.state.message}</div>
         </form>
       </div>
     );
