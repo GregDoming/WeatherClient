@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'whatwg-fetch';
 
 import Input from '../components/LocationInput';
+import WeatherForecast from './WeatherForcast';
 
 
 class LocationData extends Component {
@@ -57,23 +58,16 @@ class LocationData extends Component {
       const url = `/api/forecast?${location}`;
       const response = await fetch(url);
       const locationData = await response.json();
-      const forecastObj = locationData.consolidated_weather
-      // console.log(forecastObj)
-
-      // console.log(forecastObj[0].the_temp)
+      const forecastObj = locationData.consolidated_weather;
 
       const forecast = this.parseForecast(forecastObj);
       this.setState(forecast);
-      console.log(this.state.forecast)
-
-      
     } catch (error) {
       console.log('Error!', error);
     }
   }
 
   parseForecast = (obj) => {
-    // const weekArr = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const date = new Date();
     const tempForecast = Object.assign(this.state.forecast);
 
@@ -96,10 +90,13 @@ class LocationData extends Component {
 
   render() {
     return (
-      <form onSubmit={event => this.handleLocationChange(event)}>
-        <Input type="text" placeholder="Location" value={this.state.location} onChange={this.handleLocationChange} />
-        <button onClick={event => this.handleLocationSubmit(event)}>Location</button>
-      </form>
+      <div class="mainContainer">
+        <form onSubmit={event => this.handleLocationChange(event)}>
+          <WeatherForecast forecast={this.state.forecast} />
+          <Input type="text" placeholder="Location" value={this.state.location} onChange={this.handleLocationChange} />
+          <button onClick={event => this.handleLocationSubmit(event)}>Location</button>
+        </form>
+      </div>
     );
   }
 }
