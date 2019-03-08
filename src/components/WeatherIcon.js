@@ -64,7 +64,7 @@ const WeatherIcon = (props) => {
           weatherStatusArr.push('Clear');
           break;
         default:
-          weatherImgArr.push(<div style={{ flexDirection: 'row' }} className="image" key={`${i}broken`}>Invalid Input</div>);
+          weatherImgArr.push(<div style={{ flexDirection: 'row' }} className="image" key={`${i}broken`}></div>);
           weatherStatusArr.push('Invalid Input');
       }
     }
