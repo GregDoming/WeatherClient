@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import 'whatwg-fetch';
 
@@ -5,15 +6,17 @@ import Input from '../components/LocationInput';
 import WeatherForecast from '../components/WeatherForcast';
 import './MainContainer.css';
 
+const text = "Enter an Address to get 6 day forecast"
 
 class MainContainer extends Component {
   state = {
+    message: text,
     location: '',
     forecast: 
     [      
       {
         day: 'sunday',
-        temp: 0,
+        temp: 0.5,
         weather: ''    
       },
       {
@@ -53,19 +56,21 @@ class MainContainer extends Component {
   handleLocationSubmit = async (event) => {
     const { location } = this.state;
     event.preventDefault();
-    // console.log(typeof location)
+    
     this.setState({ location: '' });
+    // console.log(typeof location)
     try {
       const url = `/api/forecast?${location}`;
       const response = await fetch(url);
       const locationData = await response.json();
-      const forecastObj = locationData.consolidated_weather;
+      if (!locationData.message) {
+        const forecastObj = locationData.consolidated_weather;
 
-      const forecast = this.parseForecast(forecastObj);
-
-      await this.setState(forecast);
-      console.log('checking here')
-      console.log(this.state.forecast)
+        this.setState({}, this.parseForecast(forecastObj));
+        console.log(this.state.forecast);  
+      } else {
+        this.setState({ message: locationData.message });
+      }         
     } catch (error) {
       console.log('Error!', error);
     }
@@ -96,9 +101,10 @@ class MainContainer extends Component {
     return (
       <div className="mainContainer">
         <form onSubmit={event => this.handleLocationChange(event)}>
-          <WeatherForecast forecast={this.state.forecast} />
+          <WeatherForecast forecast={this.state.forecast} location={this.state.location} />
           <Input type="text" placeholder="Location" value={this.state.location} onChange={this.handleLocationChange} />
-          <button onClick={event => this.handleLocationSubmit(event)}>Location</button>
+          <button type="submit" onClick={event => this.handleLocationSubmit(event)}>Location</button>
+          <b>{this.state.message}</b>
         </form>
       </div>
     );
