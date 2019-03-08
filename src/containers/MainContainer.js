@@ -101,11 +101,13 @@ class MainContainer extends Component {
   render() {
     return (
       <div className="mainContainer">
-        <form onSubmit={event => this.handleLocationChange(event)}>
+        <form style={{textAlign: 'center'}} onSubmit={event => this.handleLocationChange(event)}>
           <WeatherIcon forecast={this.state.forecast}></WeatherIcon>
           <WeatherForecast forecast={this.state.forecast} location={this.state.location} />
-          <Input type="text" placeholder="Location" value={this.state.location} onChange={this.handleLocationChange} />
-          <button type="submit" onClick={event => this.handleLocationSubmit(event)}>Location</button>
+          <div style={{ display:"flex", justifyContent: 'center' }}>
+          <Input style={{ textAlign: 'center'}} type="text" placeholder="Location" value={this.state.location} onChange={this.handleLocationChange} />
+          <button style={{ textAlign: 'center' }}type="submit" onClick={event => this.handleLocationSubmit(event)}>Location</button>
+          </div>
           <b>{this.state.message}</b>
         </form>
       </div>

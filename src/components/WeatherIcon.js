@@ -17,7 +17,9 @@ import './WeatherIcon.css';
 const WeatherIcon = (props) => {
   const weatherImgArr = [];
   const weatherStatusArr = [];
-  const divStyle = { display: 'flex', flexFlow: 'row', flex: .07, margin: 'auto', justifyContent: 'center', marginLeft: 50 }; 
+  const divStyle = {
+    display: 'flex', flexFlow: 'row', flex: 0.07, margin: 'auto', justifyContent: 'center', marginLeft: 50 
+  }; 
 
   if (props.forecast[0].weather) {
     for (let i = 0; i < 6; i += 1) {
@@ -63,16 +65,24 @@ const WeatherIcon = (props) => {
           weatherStatusArr.push('Clear');
           break;
         default:
-          weatherImgArr.push(<div style={{flexDirection: 'row'}} className="image" key={`${i}broken`}>Invalid Input</div>);
+          weatherImgArr.push(<div style={{ flexDirection: 'row' }} className="image" key={`${i}broken`}>Invalid Input</div>);
           weatherStatusArr.push('Invalid Input');
       }
     }
   } else {
     for (let i = 0; i < props.forecast.length; i += 1) {
-      weatherImgArr.push(<ThermometerImg style={divStyle} key={i}>hi</ThermometerImg>);
+      weatherImgArr.push(
+        <ThermometerImg style={divStyle} key={i}>hello</ThermometerImg>
+      );
     }
   } 
-  return <div style={{display: 'flex'}} className="images">{weatherImgArr}</div>;
+  return (
+    <div style={{display: 'flex'}} className="images">
+      <div style={{flex: .13}}/>
+      {weatherImgArr}
+      <div style={{flex: .13}}/>
+    </div>
+  );
 };
 
 
