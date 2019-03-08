@@ -8,8 +8,9 @@ npm start on the back end will start a hot reloading server on port 4400
 
 ```
 
-**The only route to the backend is /api/forecast atm. There is a proxy setup through webpack so cors should not have to be allowed. 
-**
+**The only route to the backend is /api/forecast atm. There is a proxy setup through webpack so cors should not have to be allowed.**
+
+
 **You should be able to input city/country/state/zipcode and always get a result. The more information the more accurate the location but there are a lot of cities that the Weather API has no information on.**
 
 This app (WeatherClients) is one of two repositories belonging to this project. I build the backend microservice using Node.js and Express.js. I used Express because it abstracts much of the busy work of setting up servers. Since there was only ond page that needed to be rendered, no database, and only one route I needed to hit I had a very simple folder and file structure. One file for middleware, one file for a helper funcion (I though I would be using more or else I would have thrown this in with the controllers. 
