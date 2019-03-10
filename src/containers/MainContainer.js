@@ -75,7 +75,7 @@ class MainContainer extends Component {
         const { city } = locationData;
         const forecastObj = locationData.consolidated_weather;
         // this.setState
-        this.setState({}, this.parseForecast(forecastObj))
+        this.setState({}, this.parseForecast(forecastObj));
         this.setState({
           city,
           message: text
