@@ -24,33 +24,33 @@ class MainContainer extends Component {
       },
       {
         day: 'monday',
-        temp: 0,
+        temp: 0.5,
         weather: ''    
       }, 
       {
         day: 'tuesday',
-        temp: 0,
+        temp: 0.5,
         weather: ''    
       }, 
       {
         day: 'wednesday',
-        temp: 0,
+        temp: 0.5,
         weather: ''
       
       }, 
       {
         day: 'thursday',
-        temp: 0,
+        temp: 0.5,
         weather: ''     
       },
       {
         day: 'friday',
-        temp: 0,
+        temp: 0.5,
         weather: ''     
       }, 
       {
         day: 'saturday',
-        temp: 0,    
+        temp: 0.5,    
         weather: ''
       },
     ]
@@ -61,7 +61,6 @@ class MainContainer extends Component {
   handleLocationSubmit = async (event) => {
     const { input } = this.state;
     event.preventDefault();
-    this.setState({ city: input });
     this.setState({ input: '' });
     
     try {
@@ -73,10 +72,14 @@ class MainContainer extends Component {
       });
       const locationData = await response.json();
       if (!locationData.message) {
+        const { city } = locationData;
         const forecastObj = locationData.consolidated_weather;
-
-        this.setState({}, this.parseForecast(forecastObj));
-        this.setState({ message: text });  
+        // this.setState
+        this.setState({}, this.parseForecast(forecastObj))
+        this.setState({
+          city,
+          message: text
+        });
       } else {
         this.setState({ message: locationData.message });
       }         
@@ -87,10 +90,9 @@ class MainContainer extends Component {
 
   // Takes the response object from the server and puts the relevant information into state
   parseForecast = (obj) => {
-    const date = new Date();
     const tempForecast = Object.assign(this.state.forecast);
 
-    let day = date.getDay();
+    let day = new Date().getDay();
     let count = 0;
 
     while (count < obj.length) {

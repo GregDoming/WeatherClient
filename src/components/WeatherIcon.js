@@ -7,8 +7,8 @@ import ThunderstormImg from '../../build/static/wi-thunderstorm.svg';
 import HeavyRainImg from '../../build/static/wi-rain.svg';
 import LightRainImg from '../../build/static/wi-sprinkle.svg';
 import ShowersImg from '../../build/static/wi-showers.svg';
-import HeavyCloudImg from '../../build/static/wi-cloudy-gusts.svg';
-import LightClougImg from '../../build/static/wi-cloudy.svg';
+import HeavyCloudImg from '../../build/static/wi-cloudy.svg';
+import LightClougImg from '../../build/static/wi-cloud.svg';
 import ClearImg from '../../build/static/wi-day-sunny.svg';
 import ThermometerImg from '../../build/static/wi-thermometer.svg';
 
@@ -24,13 +24,13 @@ const WeatherIcon = (props) => {
   const weatherStatusArr = [];
   const divStyle = {
     display: 'flex', flexFlow: 'row', flex: 0.07, margin: 'auto', justifyContent: 'center', marginLeft: 50 
-  }; 
+  };
 
   if (props.forecast[0].weather) {
-    for (let i = 0; i < 7; i += 1) {
-      switch (props.forecast[i].weather) {
+    for (let i = 0, day = new Date().getDay(); i < 7; i += 1, day += 1) {
+      switch (props.forecast[day].weather) {
         case 'Snow':
-          weatherImgArr.push(<SnowImg style={divStyle} className="image" width={10} key={`${i}snow`}>hi</SnowImg>);
+          weatherImgArr.push(<SnowImg style={divStyle} className="image" width={10} key={`${i}snow`}></SnowImg>);
           weatherStatusArr.push('Snow');
           break;
         case 'Sleet':
@@ -73,20 +73,21 @@ const WeatherIcon = (props) => {
           weatherImgArr.push(<div style={{ flexDirection: 'row' }} className="image" key={`${i}broken`}></div>);
           weatherStatusArr.push('Invalid Input');
       }
+      if (day === 6) day = 0;
     }
   } else {
-    for (let i = 0; i < props.forecast.length; i += 1) {
+    for (let i = 0; i < 6; i += 1) {
       weatherImgArr.push(
         <ThermometerImg style={divStyle} key={i} />
       );
-      weatherStatusArr.push(<div  style={{flexFlow:'row', flex: 0.07}} >{props.forecast[0].temp}</div>);
+      weatherStatusArr.push(<div style={{ flexFlow: 'row', flex: 0.07 }} >{props.forecast[0].temp}</div>);
     }
   } 
   return (
     <div style={{ display: 'flex' }} className="images">
-      <div style={{ flex: 0.15 }} />
+      <div style={{ flex: 0.12 }} />
       {weatherImgArr}
-      <div style={{ flex: 0.18 }} />
+      <div style={{ flex: 0.12 }} />
     </div>
   );
 };
