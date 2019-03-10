@@ -88,7 +88,10 @@ class MainContainer extends Component {
         });
         console.log(this.state);
       } else {
-        this.setState({ message: locationData.message });
+        this.setState({ 
+          message: locationData.message,
+          loaded: true 
+        });
       }         
     } catch (error) {
       console.log('Error!', error);
