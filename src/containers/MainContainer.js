@@ -5,6 +5,7 @@ import 'whatwg-fetch';
 import Input from '../components/LocationInput';
 import WeatherForecast from '../components/WeatherForcast';
 import WeatherIcon from '../components/WeatherIcon';
+import WeatherLoading from '../components/WeatherLoading';
 
 const text = 'Enter an Address to get 6 day forecast';
 // Top Secret password
@@ -15,41 +16,42 @@ class MainContainer extends Component {
     city: '',
     message: text,
     input: '',
+    loaded: true,
     forecast: 
     [      
       {
-        day: 'sunday',
+        day: 'Sunday',
         temp: 0.5,
         weather: ''    
       },
       {
-        day: 'monday',
+        day: 'Monday',
         temp: 0.5,
         weather: ''    
       }, 
       {
-        day: 'tuesday',
+        day: 'Tuesday',
         temp: 0.5,
         weather: ''    
       }, 
       {
-        day: 'wednesday',
+        day: 'Wednesday',
         temp: 0.5,
         weather: ''
       
       }, 
       {
-        day: 'thursday',
+        day: 'Thursday',
         temp: 0.5,
         weather: ''     
       },
       {
-        day: 'friday',
+        day: 'Friday',
         temp: 0.5,
         weather: ''     
       }, 
       {
-        day: 'saturday',
+        day: 'Saturday',
         temp: 0.5,    
         weather: ''
       },
@@ -61,7 +63,10 @@ class MainContainer extends Component {
   handleLocationSubmit = async (event) => {
     const { input } = this.state;
     event.preventDefault();
-    this.setState({ input: '' });
+    this.setState({ 
+      input: '',
+      loaded: false
+    });
     
     try {
       const url = `/api/forecast?${input}`;
@@ -78,9 +83,10 @@ class MainContainer extends Component {
         this.setState({}, this.parseForecast(forecastObj));
         this.setState({
           city,
-          message: text
+          message: text,
+          loaded: true
         });
-        console.log(this.state)
+        console.log(this.state);
       } else {
         this.setState({ message: locationData.message });
       }         
@@ -115,7 +121,7 @@ class MainContainer extends Component {
       <div className="mainContainer">
         <form style={{ textAlign: 'center' }} onSubmit={event => this.handleLocationChange(event)}>
           <WeatherIcon forecast={this.state.forecast} />
-          <WeatherForecast forecast={this.state.forecast} city={this.state.city} />
+          {this.state.loaded ? <WeatherForecast forecast={this.state.forecast} city={this.state.city} /> : <WeatherLoading forecast={this.state.forecast} city={this.state.city} />}
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <Input style={{ textAlign: 'center' }} type="text" placeholder="Location" value={this.state.input} onChange={this.handleLocationChange} />
             <button style={{ textAlign: 'center' }} type="submit" onClick={event => this.handleLocationSubmit(event)}>Submit</button>
