@@ -80,6 +80,7 @@ class MainContainer extends Component {
           city,
           message: text
         });
+        console.log(this.state)
       } else {
         this.setState({ message: locationData.message });
       }         

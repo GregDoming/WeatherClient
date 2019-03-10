@@ -27,7 +27,7 @@ const WeatherIcon = (props) => {
   };
 
   if (props.forecast[0].weather) {
-    for (let i = 0, day = new Date().getDay(); i < 7; i += 1, day += 1) {
+    for (let i = 0, day = new Date().getDay(); i < 6; i += 1, day += 1) {
       switch (props.forecast[day].weather) {
         case 'Snow':
           weatherImgArr.push(<SnowImg style={divStyle} className="image" width={10} key={`${i}snow`}></SnowImg>);
@@ -73,7 +73,7 @@ const WeatherIcon = (props) => {
           weatherImgArr.push(<div style={{ flexDirection: 'row' }} className="image" key={`${i}broken`}></div>);
           weatherStatusArr.push('Invalid Input');
       }
-      if (day === 6) day = 0;
+      if (day === 6) day = -1;
     }
   } else {
     for (let i = 0; i < 6; i += 1) {
@@ -85,9 +85,9 @@ const WeatherIcon = (props) => {
   } 
   return (
     <div style={{ display: 'flex' }} className="images">
-      <div style={{ flex: 0.12 }} />
+      <div style={{ flex: 0.11 }} />
       {weatherImgArr}
-      <div style={{ flex: 0.12 }} />
+      <div style={{ flex: 0.11 }} />
     </div>
   );
 };

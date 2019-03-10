@@ -18,7 +18,7 @@ const WeatherForecast = (props) => {
   const { forecast } = props;
   for (let i = 0, day = new Date().getDay(); i < 6; i += 1, day += 1) {
     dataArr.push([forecast[day].day, forecast[day].temp, forecast[day].weather]);
-    if (day === 6) day = 0;
+    if (day === 6) day = -1;
   }
   
   const columnGraph = (
