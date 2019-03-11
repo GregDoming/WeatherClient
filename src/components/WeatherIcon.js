@@ -13,10 +13,8 @@ import ClearImg from '../../build/static/wi-day-sunny.svg';
 import ThermometerImg from '../../build/static/wi-thermometer.svg';
 import ThunderImg from '../../build/static/wi-night-thunderstorm.svg';
 
-
-
 /**
- * Turns weather descriptions into corresponding scg icons to display above bar chart
+ * Turns weather descriptions into corresponding svg icons to display above bar chart
  * @param {string} props.forecast[i].weather Six day one to two word 
  * descrtiption of the weather
  */
@@ -28,7 +26,8 @@ const WeatherIcon = (props) => {
     display: 'flex', flexFlow: 'row', flex: 0.07, margin: 'auto', justifyContent: 'center', marginLeft: 50 
   };
 
-  if (props.forecast[0].weather) {
+  // Check to see if weather exists on Monday or Sunday in case the day skipped is Sunday
+  if (props.forecast[0].weather || props.forecast[1].weather) {
     for (let i = 0, day = new Date().getDay(); i < 7; i += 1, day += 1) {
       switch (props.forecast[day].weather) {
         case 'Snow':
@@ -89,6 +88,7 @@ const WeatherIcon = (props) => {
       weatherStatusArr.push(<div style={{ flexFlow: 'row', flex: 0.07 }} >{props.forecast[0].temp}</div>);
     }
   } 
+  // console.log(weatherImgArr)
   return (
     <div style={{ display: 'flex' }} className="images">
       <div style={{ flex: 0.11 }} />

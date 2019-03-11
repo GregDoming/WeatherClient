@@ -14,8 +14,6 @@ const WeatherLoading = (props) => {
   const options = { title };
 
   const dataArr = [['DAY', 'TEMPERATURE IN C', { role: 'annotation' }]];
-  // const day = new Date().getDay();
-  const { forecast } = props;
   for (let i = 0, day = new Date().getDay(); i < 6; i += 1, day += 1) {
     dataArr.push(['Loading', Math.floor(Math.random() * 50) + 1, 'Loading']);
     if (day === 6) day = -1;

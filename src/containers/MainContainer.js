@@ -89,7 +89,7 @@ class MainContainer extends Component {
         console.log(this.state);
       } else {
         this.setState({ 
-          message: locationData.message,
+          message: `${locationData.message} Enter an Address to get 6 day forecast`,
           loaded: true 
         });
       }         
