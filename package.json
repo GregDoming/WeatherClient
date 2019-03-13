@@ -39,6 +39,7 @@
     "webpack-dev-server": "^3.2.1"
   },
   "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
     "babel-plugin-react-css-modules": "^5.2.1",
     "babel-polyfill": "^6.26.0",
     "cors": "^2.8.5",

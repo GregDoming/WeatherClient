@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import 'whatwg-fetch';
 
 import Input from '../components/LocationInput';
-import WeatherForecast from '../components/WeatherForcast';
-import WeatherIcon from '../components/WeatherIcon';
-import WeatherLoading from '../components/WeatherLoading';
+import WeatherForecast from '../components/Forecast';
+import WeatherIcon from '../components/Icon';
+import WeatherLoading from '../components/Loading';
 
 const text = 'Enter an Address to get 6 day forecast';
 // Top Secret password
@@ -13,45 +13,36 @@ const pass = '12345';
 
 class MainContainer extends Component {
   state = {
-    city: '',
+    city: 'city',
     message: text,
     input: '',
     loaded: true,
-    forecast: 
-    [      
-      {
-        day: 'Sunday',
+    forecast: [
+      { day: 'Sunday',
         temp: 0.5,
         weather: ''    
       },
-      {
-        day: 'Monday',
-        temp: 0.5,
-        weather: ''    
-      }, 
-      {
-        day: 'Tuesday',
-        temp: 0.5,
-        weather: ''    
-      }, 
-      {
-        day: 'Wednesday',
+      { day: 'Monday',
         temp: 0.5,
         weather: ''
-      
       }, 
-      {
-        day: 'Thursday',
+      { day: 'Tuesday',
+        temp: 0.5,
+        weather: ''
+      }, 
+      { day: 'Wednesday',
+        temp: 0.5,
+        weather: ''
+      }, 
+      { day: 'Thursday',
         temp: 0.5,
         weather: ''     
       },
-      {
-        day: 'Friday',
+      { day: 'Friday',
         temp: 0.5,
         weather: ''     
       }, 
-      {
-        day: 'Saturday',
+      { day: 'Saturday',
         temp: 0.5,    
         weather: ''
       },
@@ -79,14 +70,12 @@ class MainContainer extends Component {
       if (!locationData.message) {
         const { city } = locationData;
         const forecastObj = locationData.consolidated_weather;
-        // this.setState
-        this.setState({}, this.parseForecast(forecastObj));
+
         this.setState({
           city,
           message: text,
           loaded: true
-        });
-        console.log(this.state);
+        }, this.parseForecast(forecastObj));
       } else {
         this.setState({ 
           message: `${locationData.message} Enter an Address to get 6 day forecast`,
@@ -99,7 +88,7 @@ class MainContainer extends Component {
   }
 
   // Takes the response object from the server and puts the relevant information into state
-  parseForecast = (obj) => {
+  parseForecast = obj => {
     const tempForecast = Object.assign(this.state.forecast);
 
     let day = new Date().getDay();
@@ -115,21 +104,51 @@ class MainContainer extends Component {
     }
   };
   
-  handleLocationChange = (event) => {
+  handleLocationChange = event => {
     this.setState({ input: event.target.value.toUpperCase() });
   }
 
   render() {
+    const styles = {
+      container: {
+        display: 'flex',
+        justifyContent: 'center'
+      },
+      message: {
+        paddingTop: '100px', fontSize: '30px' 
+      }
+    }
+
+
     return (
-      <div className="mainContainer">
-        <form style={{ textAlign: 'center' }} onSubmit={event => this.handleLocationChange(event)}>
-          <WeatherIcon forecast={this.state.forecast} />
-          {this.state.loaded ? <WeatherForecast forecast={this.state.forecast} city={this.state.city} /> : <WeatherLoading forecast={this.state.forecast} city={this.state.city} />}
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <Input style={{ textAlign: 'center' }} type="text" placeholder="Location" value={this.state.input} onChange={this.handleLocationChange} />
-            <button style={{ textAlign: 'center' }} type="submit" onClick={event => this.handleLocationSubmit(event)}>Submit</button>
+      <div>
+        <form
+        style={{ textAlign: 'center' }}
+        onSubmit={event => this.handleLocationChange(event)}
+        >
+        <WeatherIcon forecast={this.state.forecast} />
+          { this.state.loaded
+            ? <WeatherForecast forecast={this.state.forecast} city={this.state.city} />
+            : <WeatherLoading forecast={this.state.forecast} city={this.state.city} />
+          }
+          <div style={styles.container}>
+            <Input
+              style={{ textAlign: 'center' }}
+              type="text"
+              placeholder="Location"
+              value={this.state.input}
+              onChange={this.handleLocationChange}
+            />
+            <button
+              style={{ textAlign: 'center' }}
+              type="submit"
+              onClick={event => this.handleLocationSubmit(event)}>
+              Submit
+            </button>
           </div>
-          <div style={{ paddingTop: '100px', fontSize: '30px' }}>{this.state.message}</div>
+          <div style={styles.message}>
+          {this.state.message}
+          </div>
         </form>
       </div>
     );
