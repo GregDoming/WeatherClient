@@ -20,62 +20,62 @@ import ThunderImg from '../../build/static/wi-night-thunderstorm.svg';
  */
 
 const WeatherIcon = (props) => {
-  const weatherImgArr = [];
-  const weatherStatusArr = [];
   const divStyle = {
     display: 'flex', flexFlow: 'row', flex: 0.07, margin: 'auto', justifyContent: 'center', marginLeft: 50 
   };
+  const weatherImgArr = [];
+  const weatherStatusArr = [];
 
   // Check to see if weather exists on Monday or Sunday in case the day skipped is Sunday
   if (props.forecast[0].weather || props.forecast[1].weather) {
     for (let i = 0, day = new Date().getDay(); i < 7; i += 1, day += 1) {
       switch (props.forecast[day].weather) {
         case 'Snow':
-          weatherImgArr.push(<SnowImg style={divStyle} className="image" width={10} key={`${i}snow`} />);
+          weatherImgArr.push(<SnowImg style={divStyle} width={10} key={`${i}snow`} />);
           weatherStatusArr.push('Snow');
           break;
         case 'Sleet':
-          weatherImgArr.push(<SleetImg style={divStyle} className="image" key={`${i}sleet`} />);
+          weatherImgArr.push(<SleetImg style={divStyle} key={`${i}sleet`} />);
           weatherStatusArr.push('Sleet');
           break;
         case 'Hail':
-          weatherImgArr.push(<HailImg style={divStyle} className="image" key={`${i}hail`} />);
+          weatherImgArr.push(<HailImg style={divStyle} key={`${i}hail`} />);
           weatherStatusArr.push('Hail');
           break;
         case 'ThunderStorm':
-          weatherImgArr.push(<ThunderstormImg style={divStyle} className="image" key={`${i}thunderstorm`} />);
+          weatherImgArr.push(<ThunderstormImg style={divStyle} key={`${i}thunderstorm`} />);
           weatherStatusArr.push('Thunderstorm');
           break;
         case 'Thunder':
-          weatherImgArr.push(<ThunderImg style={divStyle} className="image" key={`${i}thunder`} />);
+          weatherImgArr.push(<ThunderImg style={divStyle} key={`${i}thunder`} />);
           weatherStatusArr.push('Thunder');
           break;
         case 'Heavy Rain':
-          weatherImgArr.push(<HeavyRainImg style={divStyle} className="image" key={`${i}heavyR`} />);
+          weatherImgArr.push(<HeavyRainImg style={divStyle} key={`${i}heavyR`} />);
           weatherStatusArr.push('Heavy Rain');
           break;
         case 'Light Rain':
-          weatherImgArr.push(<LightRainImg style={divStyle} className="image" key={`${i}lightR`} />);
+          weatherImgArr.push(<LightRainImg style={divStyle} key={`${i}lightR`} />);
           weatherStatusArr.push('Light Rain');
           break;
         case 'Showers':
-          weatherImgArr.push(<ShowersImg style={divStyle} className="image" key={`${i}showers`} />);
+          weatherImgArr.push(<ShowersImg style={divStyle} key={`${i}showers`} />);
           weatherStatusArr.push('Showers');
           break;
         case 'Heavy Cloud':
-          weatherImgArr.push(<HeavyCloudImg style={divStyle} className="image" key={`${i}heavyC`} />);
+          weatherImgArr.push(<HeavyCloudImg style={divStyle} key={`${i}heavyC`} />);
           weatherStatusArr.push('Heavy Cloud');
           break;
         case 'Light Cloud':
-          weatherImgArr.push(<LightClougImg style={divStyle} className="image" key={`${i}lightC`} />);
+          weatherImgArr.push(<LightClougImg style={divStyle} key={`${i}lightC`} />);
           weatherStatusArr.push('light cloud');
           break;
         case 'Clear':
-          weatherImgArr.push(<ClearImg style={divStyle} className="image" key={`${i}clear`} />);
+          weatherImgArr.push(<ClearImg style={divStyle} key={`${i}clear`} />);
           weatherStatusArr.push('Clear');
           break;
         default:
-          weatherImgArr.push(<ClearImg style={{ flexDirection: 'row' }} className="image" key={`${i}broken`}></ClearImg>);
+          weatherImgArr.push(<ClearImg style={{ flexDirection: 'row' }} key={`${i}broken`}></ClearImg>);
           weatherStatusArr.push('Invalid Input');
       }
       if (day === 6) day = -1;
@@ -85,12 +85,11 @@ const WeatherIcon = (props) => {
       weatherImgArr.push(
         <ThermometerImg style={divStyle} key={i} />
       );
-      weatherStatusArr.push(<div style={{ flexFlow: 'row', flex: 0.07 }} >{props.forecast[0].temp}</div>);
     }
   } 
-  // console.log(weatherImgArr)
+
   return (
-    <div style={{ display: 'flex' }} className="images">
+    <div style={{ display: 'flex' }}>
       <div style={{ flex: 0.11 }} />
       {weatherImgArr}
       <div style={{ flex: 0.11 }} />
